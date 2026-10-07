@@ -37,11 +37,11 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
         <h1>Pendaftaran Peserta PKL</h1>
         <form method="POST">
             <label for="nama_lengkap">Nama Lengkap:</label>
-            <input type="text" name="nama_lengkap" class="text">
+            <input type="text" name="nama_lengkap" class="text" required>
             <label for="nis">NIS:</label>
-            <input type="number" name="nis" class="text">
+            <input type="number" name="nis" class="text" required>
             <label for="email">Email Siswa:</label>
-            <input type="email" name="email" class="text">
+            <input type="email" name="email" class="text" required>
             <label for="jurusan">Kompetensi Keahlian / Jurusan:</label>
             <div id="jurusan">
                 <input type="radio" name="jurusan" value="SIJA">
@@ -50,8 +50,8 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
                 <label for="jurusan">TJAT</label>
             </div>
             <label for="perusahaan">Pilihan Perusahaan PKL:</label>
-            <select name="perusahaan" id="perusahaan">
-                <option value="">-- Pilih --</option>
+            <select name="perusahaan" id="perusahaan" required>
+                <option value="" disabled selected>-- Pilih --</option>
                 <option value="mojiken">Mojiken Studio</option>
                 <option value="steelwool">Steelwool Studio</option>
                 <option value="ea">EA Studio</option>
@@ -67,7 +67,7 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
                 <label for="kompetensi">2D Artist</label>
             </div>
             <label for="alasan">Alasan Memilih Perusahaan:</label>
-            <textarea name="alasan" cols="30" rows="6"> </textarea>
+            <textarea name="alasan" cols="30" rows="6"> </textarea required>
             <input type="submit" name="kirim" value="Kirim" id="kirim">
         </form>
     </div>
@@ -85,7 +85,7 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
             echo "<br>";
             echo "<p>Kompetensi Siswa :";
             foreach ($kompetensi as $skill) {
-                echo htmlspecialchars($skill).", ";
+                echo ($skill).", ";
                 echo "<br>";
             };
 
