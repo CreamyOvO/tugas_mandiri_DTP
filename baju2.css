@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body {
+    padding: 0;
+    margin: 0 24px;
+    background: gray;
+    font-family: "Montserrat";
+}
+
+#judul {
+    color: white;
+    font-size: 42px;
+}
+
+#list {
+    display: grid;
+    grid-template-columns: repeat(3, 450px);
+    column-gap: 40px;
+    max-width: 100%;
+    row-gap: 20px;
+}
+
+.siswa {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 18px;
+    border-radius: 15px;
+}
+
+.siswa h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.siswa p {
+    margin: 0;
+}
+
+.label {
+    color: slategrey;
+    padding-bottom: 4px;
+    padding-top: 8px;
+}
+
+.alasan {
+    color: black;
+}
+
+.kompetensi {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.skill {
+    color: black;
+    font-size: 18px;
+    background-color: rgba(255, 0, 0, 0.538);
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.another {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}

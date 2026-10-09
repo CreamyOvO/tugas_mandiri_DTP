@@ -3,6 +3,8 @@
   <!-- Fungsi Isset pada PHP digunakan untuk mengecek apakah variabel atau sesuatu itu sudah pernah di set atau belum -->
 
 <?php 
+include "koneksi.php";
+
 $nama = "";
 $nis = "";
 $email = "";
@@ -10,6 +12,7 @@ $jurusan = "";
 $perusahaan = "";
 $kompetensi = [];
 $alasan = "";
+$id_jurusan = 0;
 
 if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email'])) {
     $nama = $_POST['nama_lengkap'];
@@ -21,6 +24,27 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
     $alasan = $_POST['alasan'];
 };
 
+if (isset($_POST['kirim'])) {
+    
+    if ($jurusan === "SIJA") {
+        $id_jurusan = 1;
+    }
+    elseif ($jurusan === "TJAT") {
+        $id_jurusan = 2;
+    };
+
+    mysqli_query($conn, "INSERT INTO siswa (nama, nis, email, id_jurusan, perusahaan, alasan) 
+    VALUES ('$nama', '$nis', '$email', '$id_jurusan', '$perusahaan', '$alasan')");
+};
+
+$id_siswa = mysqli_insert_id($conn);
+
+if (isset($_POST['kompetensi'])) {
+
+    foreach($_POST['kompetensi'] as $skill) {
+        mysqli_query($conn, "INSERT INTO kompetensi_siswa (id_siswa, nama_skill) VALUES ($id_siswa, '$skill')");
+    }
+}
 
 ?>
 
@@ -33,9 +57,9 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
     <link rel="stylesheet" href="baju.css">
 </head>
 <body>
-    <div action="pendaftaran.php" id="formdaftar">
+    <div id="formdaftar">
         <h1>Pendaftaran Peserta PKL</h1>
-        <form method="POST">
+        <form method="POST" action="pendaftaran.php">
             <label for="nama_lengkap">Nama Lengkap:</label>
             <input type="text" name="nama_lengkap" class="text" required>
             <label for="nis">NIS:</label>
@@ -61,7 +85,7 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
             <div id="kompetensi">
                 <input type="checkbox" name="kompetensi[]" value="UI/UX">
                 <label for="kompetensi">UI/UX</label>
-                <input type="checkbox" name="kompetensi[]" value="Game Developer">
+                <input type="checkbox" name="kompetensi[]" value="Game Dev">
                 <label for="kompetensi">Game Developer</label>
                 <input type="checkbox" name="kompetensi[]" value="2D Artist">
                 <label for="kompetensi">2D Artist</label>
@@ -71,7 +95,7 @@ if (isset($_POST['nama_lengkap']) && isset($_POST['nis']) && isset($_POST['email
             <input type="submit" name="kirim" value="Kirim" id="kirim">
         </form>
     </div>
-    <div id="tampil">
+    <div id="tampil" hidden>
         <?php
             echo "<p>Nama Lengkap : ".$nama."</p";
             echo "<br>";
